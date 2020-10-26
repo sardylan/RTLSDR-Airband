@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(rtl_airband)
+project(rtl_airband LANGUAGES CXX ASM)
 
 set(CMAKE_CXX_STANDARD 20)
 
@@ -66,6 +66,7 @@ if (RTL_AIRBAND_PLATFORM STREQUAL "rpiv1")
     include_directories(/opt/vc/include)
     include_directories(/opt/vc/include/interface/vcos/pthreads)
     include_directories(/opt/vc/include/interface/vmcs_host/linux)
+    link_directories(/opt/vc/lib)
     set(RTL_AIRBAND_CFLAGS "-mcpu=arm1176jzf-s -mtune=arm1176jzf-s -march=armv6zk -mfpu=vfp -ffast-math")
     add_compile_definitions(USE_BCM_VC)
     list(APPEND SOURCES rtl_airband_vfp.s)
@@ -76,6 +77,7 @@ elseif (RTL_AIRBAND_PLATFORM STREQUAL "rpiv2")
     include_directories(/opt/vc/include)
     include_directories(/opt/vc/include/interface/vcos/pthreads)
     include_directories(/opt/vc/include/interface/vmcs_host/linux)
+    link_directories(/opt/vc/lib)
     set(RTL_AIRBAND_CFLAGS "-march=armv7-a -mfpu=neon-vfpv4 -mfloat-abi=hard -ffast-math")
     add_compile_definitions(USE_BCM_VC)
     list(APPEND SOURCES rtl_airband_neon.s)
